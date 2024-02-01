@@ -10,6 +10,8 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using Xunit;
+using OpenQA.Selenium.Internal;
+
 public class SuiteTests : IDisposable
 {
     public IWebDriver driver { get; private set; }
@@ -28,6 +30,8 @@ public class SuiteTests : IDisposable
     [Fact]
     public void CT01Campos()
     {
+        var resultadoesperado = "background-color: red";
+
         driver.Navigate().GoToUrl("https://rafajms.github.io/ProjetoAlmoxarifadoMain/?authuser=0/ProjetoAlmoxarifadoMain/?authuser=0");
         driver.Manage().Window.Size = new System.Drawing.Size(945, 1012);
         driver.FindElement(By.Id("inpNumero")).SendKeys("1");
@@ -50,7 +54,47 @@ public class SuiteTests : IDisposable
         driver.FindElement(By.Id("CodigoProtudo")).SendKeys("1");
         driver.FindElement(By.Id("btnInserirItens")).Click();
         driver.FindElement(By.Id("btnGravar")).Click();
+
+        var id = driver.FindElement(By.Id("idDepartamento")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, id);
+
+        var departamento = driver.FindElement(By.Id("departamento")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, departamento);
+
+        var data = driver.FindElement(By.Id("dataRequisicao")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, data);
+
+        var idfuncionario = driver.FindElement(By.Id("idFuncionario")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, idfuncionario);
+
+        var nomefuncionario = driver.FindElement(By.Id("Nomefuncionario")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, nomefuncionario);
+
+        var cargo = driver.FindElement(By.Id("cargo")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, cargo);
+
+        var categoriamotivo = driver.FindElement(By.Id("categoriaMotivo")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, categoriamotivo);
+
+        var motivo = driver.FindElement(By.Id("Motivo")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, motivo);
+
+        var codproduto = driver.FindElement(By.Id("codigoProtudo")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, codproduto);
+
+        var descricao = driver.FindElement(By.Id("DescricaoProtudo")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, descricao); 
+
+        var quantidade = driver.FindElement(By.Id("Quantidade")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, quantidade); 
+
+        var estoque = driver.FindElement(By.Id("Estoque")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, estoque); 
+
+        Dispose();
     }
+
+    [Fact]
     public void CT02CamposCor()
     {
         driver.Navigate().GoToUrl("https://rafajms.github.io/ProjetoAlmoxarifadoMain/?authuser=0");
@@ -66,7 +110,16 @@ public class SuiteTests : IDisposable
         driver.FindElement(By.Id("CodigoProtudo")).Click();
         driver.FindElement(By.Id("DescricaoProtudo")).Click();
         driver.FindElement(By.Id("Quantidade")).Click();
+
+        var resultadoesperado = "lightgreen";
+
+        driver.FindElement(By.Id("departamento")).Click();
+        var departamento = driver.FindElement(By.Id("departamento")).GetAttribute("style");
+        Assert.Contains(resultadoesperado, departamento);
+
     }
+
+    [Fact]
     public void CT03Campos()
     {
         driver.Navigate().GoToUrl("https://rafajms.github.io/ProjetoAlmoxarifadoMain/?authuser=0");
@@ -114,6 +167,12 @@ public class SuiteTests : IDisposable
         driver.FindElement(By.Id("Quantidade")).Click();
         driver.FindElement(By.Id("Quantidade")).SendKeys("2");
         driver.FindElement(By.Id("btnGravar")).Click();
+
+        var valor1 = driver.FindElement(By.Id("idDepartamento")).GetAttribute("value");
+        Assert.IsType<int>(Convert.ToInt32(valor1));
+
+        Dispose();
     }
+
 
 }
