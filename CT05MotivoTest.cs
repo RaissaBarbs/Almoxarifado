@@ -25,7 +25,7 @@ public class SuiteTests : IDisposable {
     driver.Quit();
   }
   [Fact]
-  public void CT04e05CategoriaMotivo() {
+  public void CT05Motivo() {
     driver.Navigate().GoToUrl("https://rafajms.github.io/ProjetoAlmoxarifadoMain/?authuser=0");
     driver.Manage().Window.Size = new System.Drawing.Size(945, 1012);
     driver.FindElement(By.Id("idDepartamento")).Click();
