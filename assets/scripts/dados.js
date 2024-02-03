@@ -37,11 +37,15 @@ const produtos=[
         "Descricao": "Papel A4",
         "Estoque": 10,
         "EstoqueMinimo": 5,
+        "Preco": 5,
+        "Unidade": "Und"
     },
     {
         "idProduto": 20,
         "Descricao": "Mel doce",
         "Estoque": 5,
         "EstoqueMinimo": 5,
+        "Preco": 10,
+        "Unidade": "Und"
     },
 ]
